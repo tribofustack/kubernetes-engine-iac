@@ -23,7 +23,7 @@ resource "google_project_service" "enable_servicecontrol_api" {
 }
 
 resource "google_project_service" "enable_networksecurity_api" {
-  project                    = var.project_id
+  
   service                    = "networksecurity.googleapis.com"
   disable_dependent_services = true
 }

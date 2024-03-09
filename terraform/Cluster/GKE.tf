@@ -1,7 +1,3 @@
-/* 
-GKE cluster
-*/
-
 /* Create Service Account and IAM Member */
 resource "google_service_account" "kubernetes" {
   account_id = "kubernetes"
@@ -21,16 +17,8 @@ resource "google_container_cluster" "primary" {
   remove_default_node_pool = true
   initial_node_count       = 1
 
-  network    = google_compute_network.vpc.name
-  subnetwork = google_compute_subnetwork.subnet.name
-
-  depends_on = [
-    google_project_service.enable_artifact_registry_api,
-    google_project_service.enable_cloud_resource_manager_api,
-    google_project_service.enable_container_api,
-    google_project_service.enable_servicecontrol_api,
-    google_project_service.enable_networksecurity_api
-  ]
+  network    = var.network_link
+  subnetwork = var.subnetwork_link
 }
 
 resource "google_container_node_pool" "primary_nodes" {
@@ -65,23 +53,4 @@ resource "google_container_node_pool" "primary_nodes" {
       disable-legacy-endpoints = "true"
     }    
   }
-
-  depends_on = [
-    google_project_service.enable_artifact_registry_api,
-    google_project_service.enable_cloud_resource_manager_api,
-    google_project_service.enable_container_api,
-    google_project_service.enable_servicecontrol_api,
-    google_project_service.enable_networksecurity_api
-  ]
-}
-
-/* Output */
-output "cluster_name" {
-  value       = google_container_cluster.primary.name
-  description = "GKE Cluster Name"
-}
-
-output "cluster_ip" {
-  value       = google_container_cluster.primary.endpoint
-  description = "GKE Cluster Host"
 }
