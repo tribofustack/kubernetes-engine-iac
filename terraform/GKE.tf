@@ -5,9 +5,17 @@ GKE cluster
 data "google_container_engine_versions" "gke_version" {
   location = var.zone
   version_prefix = "1.27."
+
+  depends_on = [
+    google_project_service.enable_artifact_registry_api,
+    google_project_service.enable_cloud_resource_manager_api,
+    google_project_service.enable_container_api,
+    google_project_service.enable_servicecontrol_api,
+    google_project_service.enable_networksecurity_api
+  ]
 }
 
-/* Creatre Service Account and IAM Member*/
+/* Create Service Account and IAM Member*/
 resource "google_service_account" "kubernetes" {
   account_id = "kubernetes"
 }
