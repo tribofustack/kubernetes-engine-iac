@@ -42,4 +42,5 @@ jobs:
           -var="prefix=${{ vars.PREFIX }}" \
           -var="project_id=${{ vars.PROJECT_ID }}" \
           -var="region=${{ vars.REGION }}" \
-          -var="zone=${{ vars.ZONE }}"
+          -var="zone=${{ vars.ZONE }}" \
+          -var="image_version=${{ github.run_id }}"
