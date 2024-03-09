@@ -1,0 +1,45 @@
+name: Create GCP resources using terraform
+env:
+  CI: "main"
+on:
+  workflow_dispatch:
+
+jobs:
+  apply:
+    name: 'terraform apply'
+    runs-on: ubuntu-20.04
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v1"
+          
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_wrapper: false
+          terraform_version: 1.6.1    
+
+      - name: Terraform init and Terraform apply
+        working-directory: terraform/
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+        run: | 
+          terraform init \
+          -backend-config="bucket=${{ vars.BUCKET_NAME }}" \
+          -backend-config="prefix=terraform-state/infra"
+          terraform apply -auto-approve \
+          -var="bucket_name=${{ vars.BUCKET_NAME }}" \
+          -var="prefix=${{ vars.PREFIX }}" \
+          -var="project_id=${{ vars.PROJECT_ID }}" \
+          -var="region=${{ vars.REGION }}" \
+          -var="zone=${{ vars.ZONE }}"
