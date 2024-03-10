@@ -21,3 +21,8 @@ variable "network_link" {
 variable "subnetwork_link" {
   type    = string
 }
+
+variable "email" {
+  type    = string
+  default = "github-actions-user@orderly-developer-environment.iam.gserviceaccount.com"
+}

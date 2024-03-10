@@ -1,13 +1,4 @@
 /* Create Service Account and IAM Member */
-resource "google_service_account" "kubernetes" {
-  account_id = "kubernetes"
-}
-
-resource "google_project_iam_member" "allow_image_pull" {
-  project = var.project_id
-  role   = "roles/artifactregistry.reader"
-  member  = "serviceAccount:${google_service_account.kubernetes.email}"
-}
 
 /* Create Cluster and Node*/
 resource "google_container_cluster" "primary" {
@@ -29,7 +20,7 @@ resource "google_container_node_pool" "primary_nodes" {
   node_count = 2
 
   node_config {
-    service_account = google_service_account.kubernetes.email
+    service_account = var.email
 
     oauth_scopes = [
       "https://www.googleapis.com/auth/logging.write",
