@@ -17,3 +17,7 @@ variable "prefix" {
 variable "project_id" {
   type    = string
 }
+
+variable "email" {
+  type    = string
+}

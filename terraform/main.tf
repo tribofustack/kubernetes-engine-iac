@@ -26,6 +26,7 @@ module "cluster" {
   region          = var.region
   zone            = var.zone
   prefix          = var.prefix
+  email           = var.email
   network_link    = module.vpc.network_link
   subnetwork_link = module.vpc.subnetwork_link
   depends_on      = [module.vpc]
