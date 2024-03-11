@@ -6,15 +6,19 @@ variable "zone" {
   type    = string
 }
 
-variable "bucket_name" {
-  type    = string
-}
-
 variable "prefix" {
   type    = string
 }
 
 variable "project_id" {
+  type    = string
+}
+
+variable "network_link" {
+  type    = string
+}
+
+variable "subnetwork_link" {
   type    = string
 }
 

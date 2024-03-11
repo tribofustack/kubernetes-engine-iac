@@ -39,6 +39,7 @@ jobs:
           -backend-config="prefix=terraform-state/infra"
           terraform apply -auto-approve \
           -var="bucket_name=${{ vars.BUCKET_NAME }}" \
+          -var="email=${{ vars.EMAIL }}" \
           -var="prefix=${{ vars.PREFIX }}" \
           -var="project_id=${{ vars.PROJECT_ID }}" \
           -var="region=${{ vars.REGION }}" \
