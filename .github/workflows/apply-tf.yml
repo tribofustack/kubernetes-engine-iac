@@ -36,7 +36,7 @@ jobs:
           terraform init \
           -backend-config="bucket=${{ vars.BUCKET_NAME }}" \
           -backend-config="prefix=terraform-state/infra"
-          terraform destroy -auto-approve \
+          terraform apply -auto-approve \
           -var="bucket_name=${{ vars.BUCKET_NAME }}" \
           -var="email=${{ vars.EMAIL }}" \
           -var="prefix=${{ vars.PREFIX }}" \
