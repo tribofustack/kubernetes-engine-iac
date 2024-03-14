@@ -6,7 +6,7 @@ resource "google_container_cluster" "primary" {
   location = var.zone
   deletion_protection = false
   remove_default_node_pool = true
-  initial_node_count       = 1
+  initial_node_count       = 4
 
   network    = var.network_link
   subnetwork = var.subnetwork_link
@@ -17,7 +17,7 @@ resource "google_container_node_pool" "primary_nodes" {
   location   = var.zone
   cluster    = google_container_cluster.primary.name
   
-  node_count = 2
+  node_count = 4
 
   node_config {
     service_account = var.email
