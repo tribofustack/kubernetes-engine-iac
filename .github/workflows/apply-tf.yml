@@ -1,8 +1,7 @@
 name: Create GCP resources using terraform
 env:
   CI: "main"
-on:
-  workflow_dispatch:
+on: [push, workflow_dispatch]
 
 jobs:
   apply:
