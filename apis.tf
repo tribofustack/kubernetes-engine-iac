@@ -28,3 +28,8 @@ resource "google_project_service" "networksecurity" {
   service                    = "networksecurity.googleapis.com"
   disable_dependent_services = true
 }
+resource "google_project_service" "serviceusage" {
+  project                    = var.project_id
+  service                    = "serviceusage.googleapis.com"
+  disable_dependent_services = true
+}
