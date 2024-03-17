@@ -10,7 +10,8 @@ module "registry" {
     google_project_service.cloudresourcemanager,
     google_project_service.compute,
     google_project_service.container,
-    google_project_service.servicecontrol
+    google_project_service.servicecontrol,
+    google_project_service.serviceusage
   ]
 }
 
